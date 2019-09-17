@@ -13,11 +13,11 @@ function showPlate(number) {
 
 function activatePlate (number) {
   showPlate(number)
-  // activatePlate_1(false)
-  // activatePlate_2(false)
-  // activatePlate_3(false)
-  // activatePlate_4(false)
-  // activatePlate_5(false)
+  activatePlate_1(false)
+  activatePlate_2(false)
+  activatePlate_3(false)
+  activatePlate_4(false)
+  activatePlate_5(false)
 
   if(number === 1) {
     activatePlate_1(true)
@@ -55,16 +55,17 @@ function activatePlate_2(active) {
   const labelElements = plateElement.querySelectorAll('label')
   const aElementBack = plateElement.querySelector('a.button--back')
   const aElementNext = plateElement.querySelector('a.button--next')
+  const progress = plateElement.querySelector('.progress__line-bar')
   const percent = plateElement.querySelector('strong.percent') //вывод % прогресс-бара
 
   if(active) {
     aElementNext.addEventListener('click', toNextPlate)
     aElementBack.addEventListener('click', toPrevPlate)
   }
-  // else {
-  //   aElementNext.removeEventListener('click', toNextPlate)
-  //   aElementBack.removeEventListener('click', toPrevPlate)
-  // }
+  else {
+    aElementNext.removeEventListener('click', toNextPlate)
+    aElementBack.removeEventListener('click', toPrevPlate)
+  }
 
   for(let i =0; i < labelElements.length; i++){
     const le = labelElements[i]
@@ -84,6 +85,7 @@ function activatePlate_2(active) {
     const value = inputElement.value
     data[0] = value
     percent.innerText = "33%" //когда выбрали ответ, присваиваем %
+    progress.style.width = "33%"
   }
   function toNextPlate(event){
     event.preventDefault()
@@ -102,6 +104,7 @@ function activatePlate_3(active) {
   const labelElements = plateElement.querySelectorAll('label')
   const aElementBack = plateElement.querySelector('a.button--back')
   const aElementNext = plateElement.querySelector('a.button--next')
+  const progress = plateElement.querySelector('.progress__line-bar')
   const percent = plateElement.querySelector('strong.percent')
   percent.innerText = "33%"
 
@@ -109,10 +112,10 @@ function activatePlate_3(active) {
     aElementNext.addEventListener('click', toNextPlate)
     aElementBack.addEventListener('click', toPrevPlate)
   }
-  // else {
-  //   aElementNext.removeEventListener('click', toNextPlate)
-  //   aElementBack.removeEventListener('click', toPrevPlate)
-  // }
+  else {
+    aElementNext.removeEventListener('click', toNextPlate)
+    aElementBack.removeEventListener('click', toPrevPlate)
+  }
 
   for(let i =0; i < labelElements.length; i++){
     const le = labelElements[i]
@@ -140,9 +143,11 @@ function activatePlate_3(active) {
     /* если выбран хоть один вариант пишем 66%, иначе возвращаем 33% */
     if(data[1].length > 0) {
       percent.innerText = "66%"
+      progress.style.width = "66%"
     }
     else {
       percent.innerText = "33%"
+      progress.style.width = "33%"
     }
   }
   function toNextPlate(event){
@@ -162,6 +167,7 @@ function activatePlate_4(active) {
   const labelElements = plateElement.querySelectorAll('label')
   const aElementBack = plateElement.querySelector('a.button--back')
   const aElementNext = plateElement.querySelector('a.button--next')
+  const progress = plateElement.querySelector('.progress__line-bar')
   const percent = plateElement.querySelector('strong.percent')
   percent.innerText = "66%"
 
@@ -169,24 +175,29 @@ function activatePlate_4(active) {
     aElementNext.addEventListener('click', toNextPlate)
     aElementBack.addEventListener('click', toPrevPlate)
   }
-  // else {
-  //   aElementNext.removeEventListener('click', toNextPlate)
-  //   aElementBack.removeEventListener('click', toPrevPlate)
-  // }
+  else {
+    aElementNext.removeEventListener('click', toNextPlate)
+    aElementBack.removeEventListener('click', toPrevPlate)
+  }
 
   for(let i =0; i < labelElements.length; i++){
     const le = labelElements[i]
     if(active) {
       le.addEventListener('click', selectHandler)
     }
-    // else {
-    //   le.removeEventListener('click', selectHandler)
-    // }
+    else {
+      le.removeEventListener('click', selectHandler)
+    }
   }
   function selectHandler(event) {
+    for (let i = 0; i < labelElements.length; i++) {
+      labelElements[i].classList.remove('radio-block--active')            
+    }
+    this.classList.add('radio-block--active')
     const inputElement = this.querySelector('input')
     const value = inputElement.value
     data[2] = value
+    progress.style.width = "99%"
     percent.innerText = "99%" 
   }
   function toNextPlate(event){
@@ -211,16 +222,16 @@ function activatePlate_5(active) {
     btnElement.addEventListener('click', sendResult)
 
   }
-  // else {
-  //   btnElement.removeEventListener('click', sendResult)
-  // }
+  else {
+    btnElement.removeEventListener('click', sendResult)
+  }
 
   function sendResult(event){
     event.preventDefault()
     if(checkboxElement.checked && inputElement.value){
       data[3] = inputElement.value
       activatePlate(6)
-      console.log(data)
+      // console.log(data)
     }
   }
 }

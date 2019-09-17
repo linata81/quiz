@@ -267,7 +267,7 @@ body {
   cursor: pointer;
 }
 .radio-block--active {
-  border: 2px solid #09ac0c;
+  border: 2px solid #09ac0c !important;
 }
 .radio-block__real {
   display: none;
@@ -364,7 +364,7 @@ body {
   height: 260px;
   margin-right: 20px;
   border-radius: 4px;
-  border: 1px solid #dcdcdc;
+  border: 2px solid #dcdcdc;
   background-color: #ffffff;
   overflow: hidden;
 }
