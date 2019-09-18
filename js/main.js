@@ -86,6 +86,7 @@ function activatePlate_2(active) {
     data[0] = value
     percent.innerText = "33%" //когда выбрали ответ, присваиваем %
     progress.style.width = "33%"
+    event.stopImmediatePropagation()
   }
   function toNextPlate(event){
     event.preventDefault()
@@ -130,6 +131,7 @@ function activatePlate_3(active) {
     const inputElement = this.querySelector('input')
     this.classList.toggle('checkbox-block--active')
     inputElement.checked = !inputElement.checked
+    event.stopImmediatePropagation()
     event.preventDefault()
     const answers = []
     for(let i = 0; i < labelElements.length; i++){
@@ -199,6 +201,7 @@ function activatePlate_4(active) {
     data[2] = value
     progress.style.width = "99%"
     percent.innerText = "99%" 
+    event.stopImmediatePropagation()
   }
   function toNextPlate(event){
     event.preventDefault()
@@ -227,11 +230,12 @@ function activatePlate_5(active) {
   }
 
   function sendResult(event){
+    event.stopImmediatePropagation()
     event.preventDefault()
     if(checkboxElement.checked && inputElement.value){
       data[3] = inputElement.value
       activatePlate(6)
-      // console.log(data)
+      console.log(data)
     }
   }
 }
